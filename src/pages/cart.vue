@@ -1,41 +1,54 @@
 <template>
-  <v-container>
-    <v-col cols="12">
-      <h1 class="text-center">購物車</h1>
-    </v-col>
-    <v-divider></v-divider>
-    <v-col cols="12">
-      <v-data-table :items="items" :headers="headers">
-        <template #[`item.p_id.name`]="{ item }">
-          <span v-if="item.p_id.sell">{{ item.p_id.name }}</span>
-          <span v-else class="text-red">{{ item.p_id.name }} (已下架)</span>
-        </template>
-        <template #[`item.quantity`]="{ item }">
-          <v-btn variant="text" color="red" @click="addCart(item.p_id._id, -1)"
-            >-</v-btn
-          >
-          <span>{{ item.quantity }}</span>
-          <v-btn variant="text" color="green" @click="addCart(item.p_id._id, 1)"
-            >+</v-btn
-          >
-        </template>
-        <template #[`item.action`]="{ item }">
-          <v-btn
-            variant="text"
-            color="red"
-            icon="mdi-delete"
-            @click="addCart(item.p_id._id, item.quantity * -1)"
-          ></v-btn>
-        </template>
-      </v-data-table>
-    </v-col>
-    <v-col cols="12" class="text-center">
-      <p>總金額: {{ total }}</p>
-      <v-btn color="green" :disabled="!canCheckout" @click="checkout"
-        >結帳</v-btn
-      >
-    </v-col>
-  </v-container>
+  <div class="background">
+    <v-container>
+      <v-col cols="12">
+        <h1 class="text-center pa-5">購物車</h1>
+      </v-col>
+      <v-sheet rounded>
+        <v-row justify="center" align="center" class="text-center">
+          <v-col cols="12" class="d-flex justify-center pa-10 text-center">
+            <v-data-table :items="items" :headers="headers" class="text-center">
+              <template #[`item.p_id.name`]="{ item }">
+                <span v-if="item.p_id.sell">{{ item.p_id.name }}</span>
+                <span v-else class="text-red"
+                  >{{ item.p_id.name }} (已下架)</span
+                >
+              </template>
+              <template #[`item.quantity`]="{ item }">
+                <v-btn
+                  variant="text"
+                  color="red"
+                  @click="addCart(item.p_id._id, -1)"
+                  >-</v-btn
+                >
+                <span>{{ item.quantity }}</span>
+                <v-btn
+                  variant="text"
+                  color="green"
+                  @click="addCart(item.p_id._id, 1)"
+                  >+</v-btn
+                >
+              </template>
+              <template #[`item.action`]="{ item }">
+                <v-btn
+                  variant="text"
+                  color="red"
+                  icon="mdi-delete"
+                  @click="addCart(item.p_id._id, item.quantity * -1)"
+                ></v-btn>
+              </template>
+            </v-data-table>
+          </v-col>
+        </v-row>
+      </v-sheet>
+      <v-col cols="12" class="text-center">
+        <p class="pa-5">總金額: {{ total }}</p>
+        <v-btn color="green" :disabled="!canCheckout" @click="checkout"
+          >結帳</v-btn
+        >
+      </v-col>
+    </v-container>
+  </div>
 </template>
 
 <script setup>
@@ -48,7 +61,7 @@ import { useUserStore } from "@/stores/user";
 
 definePage({
   meta: {
-    title: "購物網 | 購物車",
+    title: "梅室 | 購物車",
     login: true,
     admin: false,
   },
@@ -135,3 +148,21 @@ const addCart = async (product, quantity) => {
   }
 };
 </script>
+
+<style scoped>
+.background {
+  height: 100%;
+  background-image: url("@/assets/umemuro-background.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.box {
+  background: rgba(255, 255, 255, 0.5);
+  /* border-radius: 1rem; */
+  /* background-color: transparent; */
+}
+h1 {
+  color: #971a07;
+}
+</style>

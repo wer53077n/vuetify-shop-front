@@ -4,7 +4,6 @@
       <v-col cols="12">
         <h1 class="text-center">登入</h1>
       </v-col>
-      <v-divider></v-divider>
       <v-col cols="12">
         <v-form :disabled="isSubmitting" @submit.prevent="submit">
           <v-text-field
@@ -25,8 +24,19 @@
             :error-messages="password.errorMessage.value"
           ></v-text-field>
           <div class="text-center">
-            <v-btn type="submit" color="green" :loading="isSubmitting"
+            <v-btn
+              type="submit"
+              color="#971A07"
+              :loading="isSubmitting"
+              @click="$emit('close-dialog')"
               >登入</v-btn
+            >
+            <v-btn
+              type="button"
+              color="gray"
+              class="ms-5"
+              @click="$emit('close-dialog')"
+              >取消</v-btn
             >
           </div>
         </v-form>
@@ -46,7 +56,7 @@ import { useSnackbar } from "vuetify-use-dialog";
 
 definePage({
   meta: {
-    title: "購物網 | 登入",
+    title: "梅室 | 登入",
     login: false,
     admin: false,
   },
@@ -83,7 +93,7 @@ const { handleSubmit, isSubmitting } = useForm({
 const account = useField("account");
 const password = useField("password");
 
-const submit = handleSubmit(async (values) => {
+const submit = handleSubmit(async (values, { emit }) => {
   const result = await user.login(values);
   if (result === "登入成功") {
     createSnackbar({
@@ -93,6 +103,7 @@ const submit = handleSubmit(async (values) => {
       },
     });
     router.push("/");
+    emit("close-dialog");
   } else {
     createSnackbar({
       text: result,

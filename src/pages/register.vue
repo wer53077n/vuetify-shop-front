@@ -4,7 +4,6 @@
       <v-col cols="12">
         <h1 class="text-center">註冊</h1>
       </v-col>
-      <v-divider></v-divider>
       <v-col cols="12">
         <v-form @submit.prevent="submit" :disabled="isSubmitting">
           <v-text-field
@@ -40,8 +39,19 @@
             :error-messages="passwordConfirm.errorMessage.value"
           ></v-text-field>
           <div class="text-center">
-            <v-btn type="submit" color="green" :loading="isSubmitting"
-              >註冊</v-btn
+            <v-btn
+              type="submit"
+              color="#971A07"
+              :loading="isSubmitting"
+              @click="$emit('close-dialog')"
+              >登入</v-btn
+            >
+            <v-btn
+              type="button"
+              color="gray"
+              class="ms-5"
+              @click="$emit('close-dialog')"
+              >取消</v-btn
             >
           </div>
         </v-form>
@@ -61,7 +71,7 @@ import { useSnackbar } from "vuetify-use-dialog";
 
 definePage({
   meta: {
-    title: "購物網 | 註冊",
+    title: "梅室 | 註冊",
     login: false,
     admin: false,
   },

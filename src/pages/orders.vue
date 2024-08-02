@@ -22,9 +22,9 @@
 
 <script setup>
 import { ref } from "vue";
+import { definePage } from "vue-router/auto";
 import { useApi } from "@/composables/axios";
 import { useSnackbar } from "vuetify-use-dialog";
-import { definePage } from "vue-router/auto";
 
 definePage({
   meta: {

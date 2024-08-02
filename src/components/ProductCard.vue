@@ -1,24 +1,26 @@
 <template>
-  <v-card>
-    <v-img :src="image" cover height="200"></v-img>
-    <v-card-title>
-      <router-link :to="'/products/' + _id">{{ name }}</router-link>
-    </v-card-title>
-    <v-card-subtitle>${{ price }}</v-card-subtitle>
-    <v-card-text>
-      {{ description }}
-    </v-card-text>
-    <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn
-        color="primary"
-        prepend-icon="mdi-cart"
-        @click="addCart"
-        :loading="loading"
-        >加入購物車</v-btn
-      >
-    </v-card-actions>
-  </v-card>
+  <v-container>
+    <v-card>
+      <v-img :src="image" center height="200"></v-img>
+      <v-card-title>
+        <router-link :to="'/products/' + _id">{{ name }}</router-link>
+      </v-card-title>
+      <v-card-subtitle>${{ price }}</v-card-subtitle>
+      <v-card-text>
+        {{ description }}
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+          color="#971A07"
+          prepend-icon="mdi-cart"
+          @click="addCart"
+          :loading="loading"
+          >加入購物車</v-btn
+        >
+      </v-card-actions>
+    </v-card>
+  </v-container>
 </template>
 
 <script setup>
@@ -59,3 +61,9 @@ const addCart = async () => {
   loading.value = false;
 };
 </script>
+
+<style scoped lang="scss">
+v-card-title {
+  text-align: center;
+}
+</style>

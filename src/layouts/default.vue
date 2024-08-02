@@ -6,7 +6,7 @@
         <v-list-item
           :prepend-icon="item.icon"
           :to="item.to"
-          :title="item.text"
+          :title="item.title"
           v-if="item.show"
         >
           <template #append>
@@ -28,37 +28,78 @@
     </v-list>
   </v-navigation-drawer>
   <!-- 導覽列 -->
-  <v-app-bar>
-    <v-container class="d-flex align-center">
+  <v-app-bar image="../assets/umemuro-background.jpg" :elevation="0">
+    <v-container class="d-flex justify-center">
       <!-- 標題 -->
-      <v-btn to="/" :active="false">購物網</v-btn>
-      <v-spacer />
+      <!-- <v-btn to="/" :active="false" class="nav-title">Umemuro</v-btn> -->
       <template v-if="mobile">
         <!-- 手機板漢堡按鈕 -->
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
       </template>
       <template v-else>
         <!-- 電腦版選單 -->
-        <template v-for="item in navItems" :key="item.to">
-          <v-btn v-if="item.show" :prepend-icon="item.icon" :to="item.to">
-            {{ item.text }}
-            <v-badge
-              color="red"
-              :content="user.cart"
-              v-if="item.to === '/cart' && user.cart > 0"
-              floating
-            ></v-badge>
+        <div class="d-flex justify-center align-center">
+          <template v-for="item in navItems" :key="item.to">
+            <router-link :to="item.to" v-if="item.show">
+              <v-img></v-img>
+              <v-btn :prepend-icon="item.icon" class="nav-link" text-center>
+                {{ item.title }}
+                <v-badge
+                  color="red"
+                  :content="user.cart"
+                  v-if="item.to === '/cart' && user.cart > 0"
+                  floating
+                ></v-badge>
+              </v-btn>
+            </router-link>
+          </template>
+          <v-btn
+            prepend-icon="mdi-account-arrow-right"
+            v-if="user.isLogin"
+            @click="logout"
+            class="nav-link"
+          >
+            登出
           </v-btn>
-        </template>
-        <v-btn
-          prepend-icon="mdi-account-arrow-right"
-          v-if="user.isLogin"
-          @click="logout"
-          >登出</v-btn
-        >
+          <v-btn
+            v-if="!user.isLogin"
+            @click="openDialog('register')"
+            class="nav-link"
+          >
+            註冊
+          </v-btn>
+          <v-btn
+            v-if="!user.isLogin"
+            @click="openDialog('login')"
+            class="nav-link"
+          >
+            登入
+          </v-btn>
+        </div>
       </template>
     </v-container>
   </v-app-bar>
+  <!-- 登入對話框 -->
+  <v-dialog v-model="dialog" max-width="400px">
+    <v-card v-if="dialogType === 'register'">
+      <v-card-title class="headline"></v-card-title>
+      <v-card-text>
+        <Register @close-dialog="dialog = false" />
+      </v-card-text>
+    </v-card>
+    <v-card v-if="dialogType === 'login'">
+      <v-card-title class="headline"></v-card-title>
+      <v-btn
+        class="text-right"
+        icon="mdi-close"
+        variant="text"
+        @close-dialog="dialog = false"
+      ></v-btn>
+      <v-card-text>
+        <Login @close-dialog="dialog = false" />
+      </v-card-text>
+    </v-card>
+  </v-dialog>
   <!-- 主要內容 -->
   <v-main>
     <router-view></router-view>
@@ -70,36 +111,79 @@ import { ref, computed } from "vue";
 import { useDisplay } from "vuetify";
 import { useUserStore } from "@/stores/user";
 import { useSnackbar } from "vuetify-use-dialog";
+import Login from "@/pages/login.vue"; // 引入Login.vue
+import Register from "@/pages/register.vue"; // 引入Register.vue
 
 const { mobile } = useDisplay();
 const user = useUserStore();
 const createSnackbar = useSnackbar();
 
 const drawer = ref(false);
+const dialog = ref(false);
+const dialogType = ref("login"); // 用於跟踪打開的對話框類型
 
 // 導覽列
 const navItems = computed(() => {
   return [
+    // {
+    //   to: "/",
+    //   title: "最新消息",
+    //   icon: null,
+    //   show: user.isLogin,
+    // },
     {
-      to: "/register",
-      text: "註冊",
-      icon: "mdi-account-plus",
-      show: !user.isLogin,
+      to: "/",
+      title: "嚴選食材",
+      icon: null,
+      show: user.isLogin,
     },
     {
-      to: "/login",
-      text: "登入",
-      icon: "mdi-account-arrow-left",
-      show: !user.isLogin,
+      to: "/",
+      title: "好料菜單",
+      icon: null,
+      show: user.isLogin,
     },
-    { to: "/cart", text: "購物車", icon: "mdi-cart", show: user.isLogin },
-    { to: "/orders", text: "訂單", icon: "mdi-list-box", show: user.isLogin },
+    {
+      to: "/",
+      title: "梅室在哪",
+      icon: null,
+      show: user.isLogin,
+    },
+    {
+      to: "/shop",
+      title: "梅室周邊",
+      icon: null,
+      show: user.isLogin,
+    },
+    {
+      to: "/reserve",
+      title: "預約服務",
+      icon: null,
+      show: user.isLogin,
+    },
+    {
+      to: "/cart",
+      icon: "mdi-cart",
+      show: user.isLogin,
+    },
     {
       to: "/admin",
-      text: "管理",
-      icon: "mdi-cog",
+      title: "管理",
+      icon: null,
       show: user.isLogin && user.isAdmin,
     },
+    // {
+    //   to: "/register",
+    //   title: "註冊",
+    //   icon: null,
+    //   show: !user.isLogin,
+    // },
+    // {
+    //   to: "/login",
+    //   title: "登入",
+    //   icon: null,
+    //   show: !user.isLogin,
+    // },
   ];
 });
 
@@ -112,4 +196,35 @@ const logout = async () => {
     },
   });
 };
+
+const openDialog = (type) => {
+  dialogType.value = type;
+  dialog.value = true;
+};
 </script>
+
+<style scoped>
+.nav-title {
+  color: #971a07; /* 修改這裡的顏色 */
+  font-size: 20px; /* 可根據需要調整字體大小 */
+}
+
+.nav-link {
+  color: #971a07; /* 修改這裡的顏色 */
+  font-weight: bold;
+  background-color: none;
+  box-shadow: none;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+</style>
