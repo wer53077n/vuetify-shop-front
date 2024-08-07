@@ -1,9 +1,9 @@
 <template>
   <div class="background">
-    <v-container class="h-100">
-      <v-row class="h-100">
+    <v-container>
+      <v-row>
         <v-col cols="12">
-          <h1 class="text-center">請選擇管理項目</h1>
+          <v-img class="foodBN" src="../assets/嚴選食材BN.jpg"></v-img>
         </v-col>
       </v-row>
     </v-container>
@@ -11,28 +11,28 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import { definePage } from "vue-router/auto";
 
 definePage({
   meta: {
-    title: "梅室 | 管理",
+    title: "梅室 | 嚴選食材",
     login: true,
-    admin: true,
+    admin: false,
   },
 });
 </script>
 
 <style scoped lang="scss">
 .background {
-  width: 100%;
-  height: 100vh;
+  height: 100%;
   background-image: url("@/assets/umemuro-background.jpg");
   background-size: cover;
   background-position: center;
 }
+.foodBN {
+  width: 1280px;
+  margin: auto;
+  border-radius: 15px;
+}
 </style>
-
-<route lang="yaml">
-meta:
-  layout: admin
-</route>

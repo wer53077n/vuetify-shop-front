@@ -44,7 +44,7 @@
               color="#971A07"
               :loading="isSubmitting"
               @click="$emit('close-dialog')"
-              >登入</v-btn
+              >註冊</v-btn
             >
             <v-btn
               type="button"

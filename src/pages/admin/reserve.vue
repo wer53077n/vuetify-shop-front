@@ -1,40 +1,38 @@
 <template>
   <div class="background">
     <v-container>
-      <v-col cols="12">
-        <h1 class="text-center pa-5">訂單查詢</h1>
-      </v-col>
-
-      <v-sheet rounded>
-        <v-row justify="center" align="center" class="text-center">
-          <v-col cols="12" class="d-flex justify-center pa-10 text-center">
-            <v-data-table :items="items" :headers="headers" class="text-center">
-              <template #[`item.cart`]="data">
-                <ul>
-                  <li v-for="item in data.item.cart" :key="item._id">
-                    {{ item.p_id.name }} * {{ item.quantity }}
-                  </li>
-                </ul>
-              </template>
-            </v-data-table>
-          </v-col>
-        </v-row>
-      </v-sheet>
+      <v-row>
+        <v-col cols="12">
+          <h1 class="text-center">預約管理</h1>
+        </v-col>
+        <v-divider></v-divider>
+        <v-col cols="10">
+          <v-data-table :items="items" :headers="headers" class="pa-7">
+            <template #[`item.cart`]="data">
+              <ul>
+                <li v-for="item in data.item.cart" :key="item._id">
+                  {{ item.p_id.name }} * {{ item.quantity }}
+                </li>
+              </ul>
+            </template>
+          </v-data-table>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import { definePage } from "vue-router/auto";
 import { useApi } from "@/composables/axios";
 import { useSnackbar } from "vuetify-use-dialog";
+import { definePage } from "vue-router/auto";
 
 definePage({
   meta: {
-    title: "梅室 | 訂單查詢",
+    title: "梅室 | 預約管理",
     login: true,
-    admin: false,
+    admin: true,
   },
 });
 
@@ -44,6 +42,7 @@ const createSnackbar = useSnackbar();
 const items = ref([]);
 const headers = [
   { title: "編號", key: "_id" },
+  { title: "帳號", key: "user.account" },
   {
     title: "日期",
     key: "createdAt",
@@ -63,7 +62,7 @@ const headers = [
 
 const loadItems = async () => {
   try {
-    const { data } = await apiAuth.get("/order");
+    const { data } = await apiAuth.get("/order/all");
     items.value.push(...data.result);
   } catch (error) {
     console.log(error);
@@ -85,7 +84,12 @@ loadItems();
   background-size: cover;
   background-position: center;
 }
-h1 {
-  color: #971a07;
+.v-col {
+  margin: auto;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  layout: admin
+</route>

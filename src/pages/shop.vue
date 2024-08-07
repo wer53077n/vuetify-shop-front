@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-          <h1 class="text-center">shop</h1>
+          <h1 class="text-center">梅室週邊</h1>
         </v-col>
         <v-col
           cols="12"
@@ -80,5 +80,8 @@ loadProducts();
   background-image: url("@/assets/umemuro-background.jpg");
   background-size: cover;
   background-position: center;
+}
+.v-col h1 {
+  color: "#971a07";
 }
 </style>

@@ -14,8 +14,8 @@
       </v-row>
       <!--------------------- 內容表格 Form --------------------->
       <v-row justify="center" align="center">
-        <v-col cols="12" class="d-flex justify-center py-10">
-          <v-sheet elevation="3" color="#fff" class="pa-10" :width="1000">
+        <v-col class="d-flex justify-center py-10">
+          <v-sheet elevation="3" color="#fff" class="pa-10" :width="1280">
             <v-form @submit.prevent="submit">
               <v-row>
                 <v-col cols="6">
@@ -30,52 +30,64 @@
                   <v-text-field label="電話" required></v-text-field>
                 </v-col>
               </v-row>
-              <v-menu
-                v-model="menu1"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="date"
-                    label="預約日期"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  v-model="date"
-                  @input="menu1 = false"
-                ></v-date-picker>
-              </v-menu>
-              <v-menu
-                v-model="menu2"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="time"
-                    label="預約時間"
-                    prepend-icon="mdi-clock"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-time-picker
-                  v-model="time"
-                  format="24hr"
-                  @input="menu2 = false"
-                ></v-time-picker>
-              </v-menu>
-              <v-select :items="peopleOptions" label="人數" required></v-select>
+              <v-row>
+                <v-col cols="4">
+                  <v-menu
+                    v-model="menu1"
+                    :close-on-content-click="false"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="date"
+                        label="預約日期"
+                        prepend-icon="mdi-calendar"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      v-model="date"
+                      @input="menu1 = false"
+                    ></v-date-picker>
+                  </v-menu>
+                </v-col>
+                <v-col cols="4">
+                  <v-menu
+                    v-model="menu2"
+                    :close-on-content-click="false"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="time"
+                        label="預約時間"
+                        prepend-icon="mdi-clock"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-time-picker
+                      v-model="time"
+                      format="24hr"
+                      @input="menu2 = false"
+                    ></v-time-picker>
+                  </v-menu>
+                </v-col>
+                <v-col cols="4">
+                  <v-select
+                    :items="peopleOptions"
+                    label="人數"
+                    required
+                  ></v-select>
+                </v-col>
+              </v-row>
               <v-textarea label="備註"></v-textarea>
               <v-btn
                 :loading="loading"
@@ -143,7 +155,7 @@ const checkApi = async (userName) => {
 definePage({
   meta: {
     title: "梅室 | 預約服務",
-    login: true,
+    login: false,
     admin: false,
   },
 });

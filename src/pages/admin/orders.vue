@@ -1,23 +1,25 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="12">
-        <h1 class="text-center">訂單管理</h1>
-      </v-col>
-      <v-divider></v-divider>
-      <v-col cols="12">
-        <v-data-table :items="items" :headers="headers">
-          <template #[`item.cart`]="data">
-            <ul>
-              <li v-for="item in data.item.cart" :key="item._id">
-                {{ item.p_id.name }} * {{ item.quantity }}
-              </li>
-            </ul>
-          </template>
-        </v-data-table>
-      </v-col>
-    </v-row>
-  </v-container>
+  <div class="background">
+    <v-container>
+      <v-row>
+        <v-col cols="12">
+          <h1 class="text-center">訂單管理</h1>
+        </v-col>
+        <v-divider></v-divider>
+        <v-col cols="10">
+          <v-data-table :items="items" :headers="headers" class="pa-7">
+            <template #[`item.cart`]="data">
+              <ul>
+                <li v-for="item in data.item.cart" :key="item._id">
+                  {{ item.p_id.name }} * {{ item.quantity }}
+                </li>
+              </ul>
+            </template>
+          </v-data-table>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script setup>
@@ -28,7 +30,7 @@ import { definePage } from "vue-router/auto";
 
 definePage({
   meta: {
-    title: "購物網 | 訂單管理",
+    title: "梅室 | 訂單管理",
     login: true,
     admin: true,
   },
@@ -74,6 +76,18 @@ const loadItems = async () => {
 };
 loadItems();
 </script>
+
+<style scoped lang="scss">
+.background {
+  height: 100vh;
+  background-image: url("@/assets/umemuro-background.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.v-col {
+  margin: auto;
+}
+</style>
 
 <route lang="yaml">
 meta:

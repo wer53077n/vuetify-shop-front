@@ -3,12 +3,11 @@
   <v-navigation-drawer v-if="mobile" v-model="drawer">
     <v-list nav>
       <template v-for="item in navItems" :key="item.to">
-        <v-list-item
-          :prepend-icon="item.icon"
-          :to="item.to"
-          :title="item.title"
-          v-if="item.show"
-        >
+        <v-list-item :to="item.to">
+          <template #prepend>
+            <v-icon>{{ item.icon }}</v-icon>
+          </template>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
           <template #append>
             <v-badge
               color="error"
@@ -19,12 +18,6 @@
           </template>
         </v-list-item>
       </template>
-      <v-list-item
-        prepend-icon="mdi-account-arrow-right"
-        v-if="user.isLogin"
-        title="登出"
-        @click="logout"
-      ></v-list-item>
     </v-list>
   </v-navigation-drawer>
   <!-- 導覽列 -->
@@ -39,41 +32,60 @@
       <template v-else>
         <!-- 電腦版選單 -->
         <div class="d-flex justify-center align-center">
-          <template v-for="item in navItems" :key="item.to">
-            <router-link :to="item.to" v-if="item.show">
-              <v-img></v-img>
+          <template v-for="item in navItems" :key="item.to" tag="v-btn">
+            <router-link :to="item.to">
               <v-btn :prepend-icon="item.icon" class="nav-link" text-center>
                 {{ item.title }}
+                <!-- 購物車的通知點點 -->
                 <v-badge
                   color="red"
                   :content="user.cart"
-                  v-if="item.to === '/cart' && user.cart > 0"
+                  v-if="item.to === '/cart'"
                   floating
                 ></v-badge>
               </v-btn>
             </router-link>
           </template>
-          <v-btn
-            prepend-icon="mdi-account-arrow-right"
-            v-if="user.isLogin"
-            @click="logout"
-            class="nav-link"
-          >
-            登出
-          </v-btn>
-          <v-btn
-            v-if="!user.isLogin"
-            @click="openDialog('register')"
-            class="nav-link"
-          >
-            註冊
-          </v-btn>
+          <!-- 會員登入選單 -->
+          <v-menu open-on-hover>
+            <template v-slot:activator="{ props }">
+              <v-btn
+                v-if="user.isLogin"
+                color="#971a07"
+                v-bind="props"
+                class="nav-link"
+              >
+                會員中心
+              </v-btn>
+            </template>
+
+            <v-list>
+              <v-list-item v-for="item in navItemMeun" :key="item.to">
+                <router-link :to="item.to">
+                  <v-btn class="nav-link" text-center>
+                    <template #prepend>
+                      <v-icon>{{ item.icon }}</v-icon>
+                    </template>
+                    {{ item.title }}
+                  </v-btn>
+                </router-link>
+              </v-list-item>
+              <v-btn
+                prepend-icon="mdi-account-arrow-right"
+                v-if="user.isLogin"
+                @click="logout"
+                class="nav-link"
+              >
+                登出
+              </v-btn>
+            </v-list>
+          </v-menu>
           <v-btn
             v-if="!user.isLogin"
             @click="openDialog('login')"
             class="nav-link"
           >
-            登入
+            登入/註冊
           </v-btn>
         </div>
       </template>
@@ -83,6 +95,12 @@
   <v-dialog v-model="dialog" max-width="400px">
     <v-card v-if="dialogType === 'register'">
       <v-card-title class="headline"></v-card-title>
+      <v-btn
+        class="text-right ml-3"
+        icon="mdi-close"
+        variant="text"
+        @click="dialog = false"
+      ></v-btn>
       <v-card-text>
         <Register @close-dialog="dialog = false" />
       </v-card-text>
@@ -90,10 +108,10 @@
     <v-card v-if="dialogType === 'login'">
       <v-card-title class="headline"></v-card-title>
       <v-btn
-        class="text-right"
+        class="text-right ml-3"
         icon="mdi-close"
         variant="text"
-        @close-dialog="dialog = false"
+        @click="dialog = false"
       ></v-btn>
       <v-card-text>
         <Login @close-dialog="dialog = false" />
@@ -125,65 +143,58 @@ const dialogType = ref("login"); // 用於跟踪打開的對話框類型
 // 導覽列
 const navItems = computed(() => {
   return [
-    // {
-    //   to: "/",
-    //   title: "最新消息",
-    //   icon: null,
-    //   show: user.isLogin,
-    // },
     {
-      to: "/",
+      to: "/#food",
       title: "嚴選食材",
       icon: null,
-      show: user.isLogin,
+      show: true,
     },
     {
-      to: "/",
+      to: "/#menu",
       title: "好料菜單",
       icon: null,
-      show: user.isLogin,
+      show: true,
     },
     {
-      to: "/",
+      to: "/#map",
       title: "梅室在哪",
       icon: null,
-      show: user.isLogin,
-    },
-    {
-      to: "/shop",
-      title: "梅室周邊",
-      icon: null,
-      show: user.isLogin,
+      show: true,
     },
     {
       to: "/reserve",
       title: "預約服務",
       icon: null,
-      show: user.isLogin,
+      show: true,
+    },
+    {
+      to: "/shop",
+      title: "梅室週邊",
+      icon: null,
+      show: true,
     },
     {
       to: "/cart",
       icon: "mdi-cart",
-      show: user.isLogin,
+      show: true,
     },
+  ];
+});
+
+const navItemMeun = computed(() => {
+  return [
     {
       to: "/admin",
-      title: "管理",
-      icon: null,
-      show: user.isLogin && user.isAdmin,
+      title: "管理者系統",
+      icon: "mdi-account-cog",
+      show: !user.isAdmin,
     },
-    // {
-    //   to: "/register",
-    //   title: "註冊",
-    //   icon: null,
-    //   show: !user.isLogin,
-    // },
-    // {
-    //   to: "/login",
-    //   title: "登入",
-    //   icon: null,
-    //   show: !user.isLogin,
-    // },
+    {
+      to: "/orders",
+      title: "訂單查詢",
+      icon: "mdi-list-box",
+      show: true,
+    },
   ];
 });
 
@@ -226,5 +237,11 @@ const openDialog = (type) => {
 
 .align-center {
   align-items: center;
+}
+/* ------------------- 手機導覽列 -------------------- */
+.v-navigation-drawer {
+  background-image: url(../assets/umemuro-background.jpg);
+  font-size: 30px;
+  color: #971a07;
 }
 </style>

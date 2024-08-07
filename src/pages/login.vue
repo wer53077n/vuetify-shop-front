@@ -23,22 +23,48 @@
             v-model="password.value.value"
             :error-messages="password.errorMessage.value"
           ></v-text-field>
-          <div class="text-center">
-            <v-btn
-              type="submit"
-              color="#971A07"
-              :loading="isSubmitting"
-              @click="$emit('close-dialog')"
-              >登入</v-btn
-            >
-            <v-btn
-              type="button"
-              color="gray"
-              class="ms-5"
-              @click="$emit('close-dialog')"
-              >取消</v-btn
-            >
-          </div>
+          <v-row>
+            <v-col class="py-8">
+              <v-btn
+                type="submit"
+                color="#971A07"
+                :loading="isSubmitting"
+                elevation="0"
+                @click="$emit('close-dialog')"
+                >登入</v-btn
+              >
+              <v-btn
+                type="button"
+                color="gray"
+                class="ms-5"
+                @click="$emit('close-dialog')"
+                >取消</v-btn
+              >
+              <!-- 註冊按鈕 -->
+              <v-btn
+                type="button"
+                class="novip ml-5"
+                @click="openDialog('register')"
+                elevation="0"
+              >
+                還不是梅室會員
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-dialog v-model="dialog" max-width="400px">
+            <v-card v-if="dialogType === 'register'">
+              <v-card-title class="headline"></v-card-title>
+              <v-btn
+                class="text-right ml-3"
+                icon="mdi-close"
+                variant="text"
+                @click="dialog = false"
+              ></v-btn>
+              <v-card-text>
+                <Register @close-dialog="dialog = false" />
+              </v-card-text>
+            </v-card>
+          </v-dialog>
         </v-form>
       </v-col>
     </v-row>
@@ -53,6 +79,7 @@ import validator from "validator";
 import { definePage } from "vue-router/auto";
 import { useUserStore } from "@/stores/user";
 import { useSnackbar } from "vuetify-use-dialog";
+import Register from "@/pages/register.vue"; // 引入Register.vue
 
 definePage({
   meta: {
@@ -65,6 +92,9 @@ definePage({
 const router = useRouter();
 const user = useUserStore();
 const createSnackbar = useSnackbar();
+
+const dialog = ref(false);
+const dialogType = ref("register"); // 用於跟踪打開的對話框類型
 
 const schema = yup.object({
   account: yup
@@ -113,4 +143,15 @@ const submit = handleSubmit(async (values, { emit }) => {
     });
   }
 });
+
+const openDialog = (type) => {
+  dialogType.value = type;
+  dialog.value = true;
+};
 </script>
+
+<style scoped lang="scss">
+.novip {
+  color: #971a07;
+}
+</style>

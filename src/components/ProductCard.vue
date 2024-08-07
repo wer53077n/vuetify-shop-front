@@ -1,11 +1,17 @@
 <template>
   <v-container>
-    <v-card>
-      <v-img :src="image" center height="200"></v-img>
-      <v-card-title>
-        <router-link :to="'/products/' + _id">{{ name }}</router-link>
-      </v-card-title>
-      <v-card-subtitle>${{ price }}</v-card-subtitle>
+    <v-card class="pa-3">
+      <v-img :src="image" center height="350"></v-img>
+      <v-row>
+        <v-col>
+          <v-card-title>
+            <router-link :to="'/products/' + _id">{{ name }}</router-link>
+          </v-card-title>
+        </v-col>
+        <v-col>
+          <v-card-subtitle>${{ price }}</v-card-subtitle>
+        </v-col>
+      </v-row>
       <v-card-text>
         {{ description }}
       </v-card-text>
@@ -63,7 +69,20 @@ const addCart = async () => {
 </script>
 
 <style scoped lang="scss">
-v-card-title {
-  text-align: center;
+.v-card-title {
+  text-align: left;
+  margin: auto;
+  padding: 16px;
+}
+.v-card-subtitle {
+  text-align: right;
+  margin: 1rem auto;
+  color: red;
+  font-size: 1.3rem;
+}
+.v-card-text {
+  font-size: 1rem;
+  padding: 0;
+  margin: 1rem;
 }
 </style>

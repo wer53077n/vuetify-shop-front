@@ -57,135 +57,159 @@
       </swiper>
     </div>
     <!--------------------------- 嚴選食材 --------------------------->
-    <div class="food">
-      <v-row justify="center" align="center">
-        <v-col cols="12" class="d-flex justify-center">
-          <div class="foodText">
-            <h1 class="ma-5">闆娘嚴選食材</h1>
-            <p>
-              細心選用優質與營養食材，每一口都是精挑細選的美味。
-              <br />
-              梅室早午餐，呈現給您獨一無二的風味體驗。
-            </p>
-            <v-btn
-              class="ma-5"
-              rounded="xl"
-              size="large"
-              color="#971a07"
-              variant="flat"
-              >《 前往嚴選 》</v-btn
-            >
-          </div>
-          <v-img class="foodBg" src="../assets/foodline.png"></v-img>
-        </v-col>
-      </v-row>
+    <div id="food">
+      <div class="food">
+        <v-row justify="center" align="center">
+          <v-col cols="12" class="d-flex justify-center">
+            <div class="foodText">
+              <h1 class="ma-5">闆娘嚴選食材</h1>
+              <p>
+                細心選用優質與營養食材，每一口都是精挑細選的美味。
+                <br />
+                梅室早午餐，呈現給您獨一無二的風味體驗。
+              </p>
+              <v-btn
+                class="ma-5"
+                rounded="xl"
+                size="large"
+                color="#971a07"
+                variant="flat"
+                @click="goToFood"
+                >《 前往嚴選 》</v-btn
+              >
+            </div>
+            <v-img class="foodBg" src="../assets/foodline.png"></v-img>
+          </v-col>
+        </v-row>
+      </div>
     </div>
     <!--------------------------- 菜單 --------------------------->
-    <div class="swiper-container">
-      <swiper
-        :slidesPerView="1"
-        :centeredSlides="false"
-        :slidesPerGroupSkip="1"
-        :grabCursor="true"
-        :keyboard="{
-          enabled: true,
-        }"
-        :breakpoints="{
-          '1000': {
-            slidesPerView: 2,
-            slidesPerGroup: 2,
-          },
-        }"
-        :scrollbar="true"
-        :navigation="true"
-        :pagination="{
-          clickable: true,
-        }"
-        :modules="modules"
-        class="SwiperMenu my-10"
-      >
-        <swiper-slide
-          ><img
-            src="https://cdn.magloft.com/github/swiper/images/page-001.jpg"
-            class="swiper-image"
-        /></swiper-slide>
-        <swiper-slide
-          ><img
-            src="https://cdn.magloft.com/github/swiper/images/page-002.jpg"
-            class="swiper-image"
-        /></swiper-slide>
-        <swiper-slide
-          ><img
-            src="https://cdn.magloft.com/github/swiper/images/page-003.jpg"
-            class="swiper-image"
-        /></swiper-slide>
-        <swiper-slide
-          ><img
-            src="https://cdn.magloft.com/github/swiper/images/page-004.jpg"
-            class="swiper-image"
-        /></swiper-slide>
-        <swiper-slide
-          ><img
-            src="https://cdn.magloft.com/github/swiper/images/page-005.jpg"
-            class="swiper-image"
-        /></swiper-slide>
-        <swiper-slide
-          ><img
-            src="https://cdn.magloft.com/github/swiper/images/page-006.jpg"
-            class="swiper-image"
-        /></swiper-slide>
-        <swiper-slide
-          ><img
-            src="https://cdn.magloft.com/github/swiper/images/page-007.jpg"
-            class="swiper-image"
-        /></swiper-slide>
-        <swiper-slide
-          ><img
-            src="https://cdn.magloft.com/github/swiper/images/page-008.jpg"
-            class="swiper-image"
-        /></swiper-slide>
-        <swiper-slide
-          ><img
-            src="https://cdn.magloft.com/github/swiper/images/page-009.jpg"
-            class="swiper-image"
-        /></swiper-slide>
-      </swiper>
+    <div id="menu">
+      <div class="swiper-container">
+        <swiper
+          :slidesPerView="1"
+          :centeredSlides="false"
+          :slidesPerGroupSkip="1"
+          :grabCursor="true"
+          :keyboard="{
+            enabled: true,
+          }"
+          :breakpoints="{
+            '1000': {
+              slidesPerView: 2,
+              slidesPerGroup: 2,
+            },
+          }"
+          :scrollbar="true"
+          :navigation="true"
+          :pagination="{
+            clickable: true,
+          }"
+          :modules="modules"
+          class="SwiperMenu my-10"
+        >
+          <swiper-slide
+            ><img
+              src="https://cdn.magloft.com/github/swiper/images/page-001.jpg"
+              class="swiper-image"
+          /></swiper-slide>
+          <swiper-slide
+            ><img
+              src="https://cdn.magloft.com/github/swiper/images/page-002.jpg"
+              class="swiper-image"
+          /></swiper-slide>
+          <swiper-slide
+            ><img
+              src="https://cdn.magloft.com/github/swiper/images/page-003.jpg"
+              class="swiper-image"
+          /></swiper-slide>
+          <swiper-slide
+            ><img
+              src="https://cdn.magloft.com/github/swiper/images/page-004.jpg"
+              class="swiper-image"
+          /></swiper-slide>
+          <swiper-slide
+            ><img
+              src="https://cdn.magloft.com/github/swiper/images/page-005.jpg"
+              class="swiper-image"
+          /></swiper-slide>
+          <swiper-slide
+            ><img
+              src="https://cdn.magloft.com/github/swiper/images/page-006.jpg"
+              class="swiper-image"
+          /></swiper-slide>
+          <swiper-slide
+            ><img
+              src="https://cdn.magloft.com/github/swiper/images/page-007.jpg"
+              class="swiper-image"
+          /></swiper-slide>
+          <swiper-slide
+            ><img
+              src="https://cdn.magloft.com/github/swiper/images/page-008.jpg"
+              class="swiper-image"
+          /></swiper-slide>
+          <swiper-slide
+            ><img
+              src="https://cdn.magloft.com/github/swiper/images/page-009.jpg"
+              class="swiper-image"
+          /></swiper-slide>
+        </swiper>
+      </div>
     </div>
     <!--------------------------- 地圖 --------------------------->
     <v-container>
       <v-row class="py-10">
         <v-col cols="5" class="map">
-          <h2>梅室在哪</h2>
-          <br />
-          <p>242新北市新莊區中華路二段284號</p>
-          <p>02 2994 0557</p>
-          <br />
-          <v-btn rounded="xl" size="x-large" color="#971a07" variant="outlined"
-            >GOOGLE MAP 》</v-btn
-          >
+          <div id="map">
+            <h1>梅室在哪</h1>
+            <br />
+            <p>新北市新莊區中華路二段284號</p>
+            <p>02 2994 0557</p>
+            <p>營業時間: 週二 10:00~17:00</p>
+            <br />
+            <v-btn
+              rounded="xl"
+              size="x-large"
+              color="#971a07"
+              variant="outlined"
+            >
+              <a
+                href="https://maps.app.goo.gl/bct2W2qBXNPTyTRW7"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="text-decoration: none; color: inherit"
+              >
+                GOOGLE MAP 》</a
+              ></v-btn
+            >
+            <br />
+            <v-btn
+              to="/reserve"
+              rounded="xl"
+              size="x-large"
+              color="#971a07"
+              variant="outlined"
+              class="ma-5"
+            >
+              前往預約
+            </v-btn>
+          </div>
         </v-col>
         <v-col cols="7">
           <v-img class="mapImg" src="../assets/map.png"></v-img>
         </v-col>
       </v-row>
     </v-container>
-    <Footer />
   </div>
+  <Footer />
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { definePage } from "vue-router/auto";
 import Footer from "@/layouts/footer.vue";
-
-// swiper套件，最新消息、菜單 輪播圖 -----------------------------------------------------------------
-
-// Import Swiper Vue.js components
+// swiper套件，最新消息、菜單 輪播圖 ---------------------------------------------
 import { Swiper, SwiperSlide } from "swiper/vue";
-// Import required modules
-import image1 from "@/assets/LINE_ALBUM_ByNikon_5.jpg";
-import image2 from "@/assets/LINE_ALBUM_ByNikon_3.jpg";
-import image3 from "@/assets/LINE_ALBUM_ByNikon_4.jpg";
 import {
   Autoplay,
   Pagination,
@@ -193,7 +217,9 @@ import {
   Keyboard,
   Scrollbar,
 } from "swiper/modules";
-// Import Swiper styles
+import image1 from "@/assets/LINE_ALBUM_ByNikon_5.jpg";
+import image2 from "@/assets/LINE_ALBUM_ByNikon_3.jpg";
+import image3 from "@/assets/LINE_ALBUM_ByNikon_4.jpg";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -207,18 +233,19 @@ definePage({
   },
 });
 
-const images = ref([
-  image1,
-  image2,
-  image3,
-  // 添加更多圖片路徑
-]);
+const images = ref([image1, image2, image3]);
 const modules = [Autoplay, Pagination, Navigation, Scrollbar, Keyboard];
 
 const isVisible = ref(true);
 
 const hideCard = () => {
   isVisible.value = false;
+};
+
+const router = useRouter();
+
+const goToFood = () => {
+  router.push("/food");
 };
 </script>
 
@@ -322,6 +349,11 @@ const hideCard = () => {
   text-align: center;
   margin: auto;
   color: #971a07;
+}
+
+.map p {
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .mapImg {
