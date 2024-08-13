@@ -1,34 +1,36 @@
 <template>
   <v-footer class="text-center d-flex flex-column" color="#971A07">
-    <div class="my-4">
-      <v-btn
-        v-for="icon in icons"
-        :key="icon"
-        :icon="icon"
-        class="mx-2"
-        variant="text"
-        :href="getIconLink(icon)"
-        target="_blank"
-      >
-        <v-icon>{{ icon }}</v-icon>
-      </v-btn>
-    </div>
-
-    <div class="pt-0 px-4">
-      Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris
-      cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id
-      ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui.
-      Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada.
-      Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin.
-      Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius
-      natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-    </div>
-
     <v-divider class="my-4"></v-divider>
-
-    <div class="mb-4">
-      {{ new Date().getFullYear() }} — <strong>Chia</strong>
-    </div>
+    <v-row class="d-flex align-content-between">
+      <v-col cols="7">
+        <v-img src="../assets/梅室umeguro_logo guide-18.png"></v-img>
+        <h2>早午餐、咖啡、點心</h2>
+      </v-col>
+      <v-col cols="5" class="pt-0 px-4">
+        <h2>營業時間</h2>
+        <p>週二至週六 10:00~19:00</p>
+        <p class="small">(Last Order 18:30)</p>
+        <br />
+        <p>週日 10:00~17:00</p>
+        <p class="small">(Last Order 16:30)</p>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <v-btn
+          v-for="icon in icons"
+          :key="icon"
+          :icon="icon"
+          class="mx-2"
+          variant="text"
+          :href="getIconLink(icon)"
+          target="_blank"
+        >
+          <v-icon>{{ icon }}</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+    <div class="my-4"></div>
   </v-footer>
 </template>
 
@@ -50,3 +52,9 @@ const getIconLink = (icon) => {
   }
 };
 </script>
+
+<style scoped lang="scss">
+.small {
+  font-size: 15px;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card class="pa-3">
-      <v-img :src="image" center height="350"></v-img>
+      <v-img :src="image" center width="350"></v-img>
       <v-row>
         <v-col>
           <v-card-title>

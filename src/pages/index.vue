@@ -110,54 +110,49 @@
         >
           <swiper-slide
             ><img
-              src="https://cdn.magloft.com/github/swiper/images/page-001.jpg"
+              src="../assets/images/2024內頁_封面_01.jpg"
               class="swiper-image"
           /></swiper-slide>
           <swiper-slide
             ><img
-              src="https://cdn.magloft.com/github/swiper/images/page-002.jpg"
+              src="../assets/images/2024內頁_封面_02.jpg"
               class="swiper-image"
           /></swiper-slide>
           <swiper-slide
-            ><img
-              src="https://cdn.magloft.com/github/swiper/images/page-003.jpg"
-              class="swiper-image"
+            ><img src="../assets/images/2024內頁_10.jpg" class="swiper-image"
           /></swiper-slide>
           <swiper-slide
-            ><img
-              src="https://cdn.magloft.com/github/swiper/images/page-004.jpg"
-              class="swiper-image"
+            ><img src="../assets/images/2024內頁_1.jpg" class="swiper-image"
           /></swiper-slide>
           <swiper-slide
-            ><img
-              src="https://cdn.magloft.com/github/swiper/images/page-005.jpg"
-              class="swiper-image"
+            ><img src="../assets/images/2024內頁_2.png" class="swiper-image"
           /></swiper-slide>
           <swiper-slide
-            ><img
-              src="https://cdn.magloft.com/github/swiper/images/page-006.jpg"
-              class="swiper-image"
+            ><img src="../assets/images/2024內頁_3.jpg" class="swiper-image"
           /></swiper-slide>
           <swiper-slide
-            ><img
-              src="https://cdn.magloft.com/github/swiper/images/page-007.jpg"
-              class="swiper-image"
+            ><img src="../assets/images/2024內頁_4.jpg" class="swiper-image"
           /></swiper-slide>
           <swiper-slide
-            ><img
-              src="https://cdn.magloft.com/github/swiper/images/page-008.jpg"
-              class="swiper-image"
+            ><img src="../assets/images/2024內頁_5.jpg" class="swiper-image"
           /></swiper-slide>
           <swiper-slide
-            ><img
-              src="https://cdn.magloft.com/github/swiper/images/page-009.jpg"
-              class="swiper-image"
+            ><img src="../assets/images/2024內頁_6.jpg" class="swiper-image"
+          /></swiper-slide>
+          <swiper-slide
+            ><img src="../assets/images/2024內頁_7.jpg" class="swiper-image"
+          /></swiper-slide>
+          <swiper-slide
+            ><img src="../assets/images/2024內頁_8.jpg" class="swiper-image"
+          /></swiper-slide>
+          <swiper-slide
+            ><img src="../assets/images/2024內頁_9.jpg" class="swiper-image"
           /></swiper-slide>
         </swiper>
       </div>
     </div>
     <!--------------------------- 地圖 --------------------------->
-    <v-container>
+    <v-container class="mapContainer">
       <v-row class="py-10">
         <v-col cols="5" class="map">
           <div id="map">
@@ -165,7 +160,6 @@
             <br />
             <p>新北市新莊區中華路二段284號</p>
             <p>02 2994 0557</p>
-            <p>營業時間: 週二 10:00~17:00</p>
             <br />
             <v-btn
               rounded="xl"
@@ -188,7 +182,7 @@
               rounded="xl"
               size="x-large"
               color="#971a07"
-              variant="outlined"
+              variant="flat"
               class="ma-5"
             >
               前往預約
@@ -305,10 +299,10 @@ const goToFood = () => {
 
 .mySwiper {
   /* 調整 Swiper 的樣式 */
-  height: 800px; /* 設置 Swiper 容器的高度 */
+  height: 100%; /* 設置 Swiper 容器的高度 */
 }
 .SwiperMenu {
-  height: 1000px;
+  width: 90%;
 }
 
 .swiper-image {
@@ -344,6 +338,9 @@ const goToFood = () => {
 }
 
 /* ----------------- 地圖 ----------------- */
+.mapContainer {
+  width: 1280px;
+}
 .map {
   /* display: flex; */
   text-align: center;
@@ -354,6 +351,7 @@ const goToFood = () => {
 .map p {
   font-size: 20px;
   font-weight: 600;
+  line-height: 2.5rem;
 }
 
 .mapImg {

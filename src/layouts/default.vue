@@ -74,7 +74,7 @@
                 prepend-icon="mdi-account-arrow-right"
                 v-if="user.isLogin"
                 @click="logout"
-                class="nav-link"
+                class="nav-link ml-4"
               >
                 登出
               </v-btn>
@@ -187,13 +187,13 @@ const navItemMeun = computed(() => {
       to: "/admin",
       title: "管理者系統",
       icon: "mdi-account-cog",
-      show: !user.isAdmin,
+      show: user.isAdmin,
     },
     {
       to: "/orders",
       title: "訂單查詢",
       icon: "mdi-list-box",
-      show: true,
+      show: user.isLogin,
     },
   ];
 });

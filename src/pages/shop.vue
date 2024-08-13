@@ -1,20 +1,19 @@
 <template>
   <div class="background">
     <v-container>
+      <!-- Banner -->
       <v-row>
         <v-col cols="12">
-          <h1 class="text-center">梅室週邊</h1>
+          <v-img class="shopBN" src="../assets/週邊BN.jpg"></v-img>
         </v-col>
-        <v-col
-          cols="12"
-          md="6"
-          lg="3"
-          v-for="product in products"
-          :key="product._id"
-        >
+      </v-row>
+
+      <v-row class="row">
+        <v-col cols="3" v-for="product in products" :key="product._id">
           <ProductCard v-bind="product"></ProductCard>
         </v-col>
-        <v-col cols="12">
+
+        <v-col class="shopBox" cols="10">
           <v-pagination
             v-model="page"
             :length="pages"
@@ -81,7 +80,17 @@ loadProducts();
   background-size: cover;
   background-position: center;
 }
-.v-col h1 {
-  color: "#971a07";
+
+.shopBN {
+  width: 1280px;
+  margin: auto;
+  border-radius: 15px;
+}
+.row {
+  margin: auto;
+  width: 1320px;
+}
+.shopBox {
+  width: 1280px;
 }
 </style>
