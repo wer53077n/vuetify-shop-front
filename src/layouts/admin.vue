@@ -55,7 +55,7 @@ const avatar = computed(() => {
   background-size: cover;
   background-position: center;
 }
-.tttt {
+.v-list-item {
   position: relative;
   bottom: 0;
   color: #971a07;

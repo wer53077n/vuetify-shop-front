@@ -89,7 +89,7 @@
               accept="image/jpeg,image/png"
               deletable
               max-size="1MB"
-              help-text="選擇檔案或拖曳到這裡"
+              help-text="選擇檔案或拖曳到這裡呦"
               :error-text="{
                 type: '檔案格式不支援',
                 size: '檔案大小不能超過 1MB',
@@ -121,7 +121,7 @@ import { useSnackbar } from "vuetify-use-dialog";
 
 definePage({
   meta: {
-    title: "購物網 | 商品管理",
+    title: "梅室 | 商品管理",
     login: true,
     admin: true,
   },
@@ -247,7 +247,7 @@ const tableHeaders = [
   { title: "價格", align: "center", sortable: true, key: "price" },
   { title: "分類", align: "center", sortable: true, key: "category" },
   { title: "上架", align: "center", sortable: true, key: "sell" },
-  { title: "操作", align: "center", sortable: false, key: "action" },
+  { title: "編輯", align: "center", sortable: false, key: "action" },
 ];
 const tableLoading = ref(true);
 const tableItemsLength = ref(0);

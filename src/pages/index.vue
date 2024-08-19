@@ -7,6 +7,7 @@
           color="#971a07"
           rounded="2"
           class="pa-5 relative"
+          height="250"
         >
           <v-btn
             variant="tonal"
@@ -15,16 +16,16 @@
             class="close-btn"
             @click="hideCard"
           ></v-btn>
-          <v-card-title class="cardTitle pt-10">最新消息</v-card-title>
-          <v-card-text class="cardText pt-5">
+          <v-card-title class="cardTitle pt-5">最新消息</v-card-title>
+          <v-card-text class="cardText pt-3">
             營業時間調整公告<br />
             8/20(二)
             <br />12:00~19:00
           </v-card-text>
-          <v-card-actions class="newsBtn"> </v-card-actions>
         </v-card>
       </transition>
     </div>
+
     <v-container>
       <!--------------------------- Title的大LOGO --------------------------->
       <v-row justify="center" align="center">
@@ -33,9 +34,10 @@
         </v-col>
       </v-row>
     </v-container>
+
     <!--------------------------- 輪播圖 --------------------------->
+
     <div class="swiper-container">
-      <!-- https://codesandbox.io/p/devbox/swiper-vue-scrollbar-l3898n?file=%2Fsrc%2FApp.vue%3A15%2C12 -->
       <swiper
         :spaceBetween="30"
         :centeredSlides="true"
@@ -56,9 +58,12 @@
         </swiper-slide>
       </swiper>
     </div>
+
     <!--------------------------- 嚴選食材 --------------------------->
     <div id="food">
       <div class="food">
+        <!-- AOS 動畫包裹 -->
+
         <v-row justify="center" align="center">
           <v-col cols="12" class="d-flex justify-center">
             <div class="foodText">
@@ -78,11 +83,23 @@
                 >《 前往嚴選 》</v-btn
               >
             </div>
-            <v-img class="foodBg" src="../assets/foodline.png"></v-img>
+            <v-img
+              class="foodBg1"
+              src="../assets/foodline1.png"
+              data-aos="fade-up"
+            ></v-img>
+            <v-img
+              class="foodBg2"
+              src="../assets/foodline2.png"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="150"
+            ></v-img>
           </v-col>
         </v-row>
       </div>
     </div>
+
     <!--------------------------- 菜單 --------------------------->
     <div id="menu">
       <div class="swiper-container">
@@ -151,50 +168,56 @@
         </swiper>
       </div>
     </div>
+
     <!--------------------------- 地圖 --------------------------->
     <v-container class="mapContainer">
-      <v-row class="py-10">
-        <v-col cols="5" class="map">
-          <div id="map">
-            <h1>梅室在哪</h1>
-            <br />
-            <p>新北市新莊區中華路二段284號</p>
-            <p>02 2994 0557</p>
-            <br />
-            <v-btn
-              rounded="xl"
-              size="x-large"
-              color="#971a07"
-              variant="outlined"
-            >
-              <a
-                href="https://maps.app.goo.gl/bct2W2qBXNPTyTRW7"
-                target="_blank"
-                rel="noopener noreferrer"
-                style="text-decoration: none; color: inherit"
+      <!-- AOS 動畫包裹 -->
+      <div data-aos="fade-up">
+        <v-row class="pt-16">
+          <v-col cols="5" class="map">
+            <div id="map">
+              <h1>梅室在哪</h1>
+              <br />
+              <p>新北市新莊區中華路二段284號</p>
+              <p>02 2994 0557</p>
+              <br />
+              <v-btn
+                rounded="xl"
+                size="x-large"
+                color="#971a07"
+                variant="outlined"
               >
-                GOOGLE MAP 》</a
-              ></v-btn
-            >
-            <br />
-            <v-btn
-              to="/reserve"
-              rounded="xl"
-              size="x-large"
-              color="#971a07"
-              variant="flat"
-              class="ma-5"
-            >
-              前往預約
-            </v-btn>
-          </div>
-        </v-col>
-        <v-col cols="7">
-          <v-img class="mapImg" src="../assets/map.png"></v-img>
-        </v-col>
-      </v-row>
+                <a
+                  href="https://maps.app.goo.gl/bct2W2qBXNPTyTRW7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style="text-decoration: none; color: inherit"
+                >
+                  GOOGLE MAP 》</a
+                ></v-btn
+              >
+              <br />
+              <v-btn
+                to="/reserve"
+                rounded="xl"
+                size="x-large"
+                color="#971a07"
+                variant="flat"
+                class="ma-5"
+                :loading="loading"
+              >
+                前往預約
+              </v-btn>
+            </div>
+          </v-col>
+          <v-col cols="7">
+            <v-img class="mapImg" src="../assets/map.png"></v-img>
+          </v-col>
+        </v-row>
+      </div>
     </v-container>
   </div>
+
   <Footer />
 </template>
 
@@ -219,6 +242,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
+// ------------aos--------------------------------
+import { onMounted } from "vue";
+import AOS from "aos";
+import "aos/dist/aos.css"; // 引入 AOS 的樣式
+
 definePage({
   meta: {
     title: "梅室 Umemuro",
@@ -241,6 +269,31 @@ const router = useRouter();
 const goToFood = () => {
   router.push("/food");
 };
+
+onMounted(() => {
+  AOS.init({
+    // 全局設置動畫的持續時間
+    duration: 1500, // 動畫持續時間，單位為毫秒
+
+    // 動畫的延遲時間
+    delay: 100, // 延遲時間，單位為毫秒
+
+    // 動畫的觸發點，基於元素在 viewport 中的位置
+    offset: 200, // 觸發動畫的偏移量，單位為像素
+
+    // 控制動畫重複觸發
+    once: false, // 是否只觸發一次動畫（false 為重複觸發）
+
+    // 動畫的起始點（0-1），表示動畫在滾動到視口的何處開始
+    anchorPlacement: "top-bottom", // 例如 'top-center', 'bottom-bottom', 'top-bottom' 等
+
+    // 當滾動到某個位置後是否啟用動畫
+    disable: function () {
+      // 比如在某個 breakpoint 之後禁用動畫
+      return window.innerWidth < 768; // 在小於 768px 的寬度時禁用 AOS
+    },
+  });
+});
 </script>
 
 <style scoped lang="scss">
@@ -270,16 +323,6 @@ const goToFood = () => {
   position: absolute;
   top: 8px;
   right: 8px;
-}
-
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-  transition: all 0.5s ease;
-}
-
-.slide-fade-enter, .slide-fade-leave-to /* .slide-fade-leave-active in <2.1.8 */ {
-  transform: translateX(-50%);
-  opacity: 0;
 }
 
 .cardTitle {
@@ -317,9 +360,20 @@ const goToFood = () => {
   position: relative;
 }
 
-.foodBg {
+.foodBg1 {
   width: 100%;
   height: auto;
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  pointer-events: auto;
+}
+.foodBg2 {
+  width: 100%;
+  height: auto;
+  pointer-events: auto;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .foodText {

@@ -24,62 +24,25 @@
                     v-model="userName"
                     :rules="rules"
                     required
-                  ></v-text-field>
+                  >
+                  </v-text-field>
                 </v-col>
                 <v-col cols="6">
                   <v-text-field label="電話" required></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="4">
-                  <v-menu
-                    v-model="menu1"
-                    :close-on-content-click="false"
-                    transition="scale-transition"
-                    offset-y
-                    min-width="auto"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="date"
-                        label="預約日期"
-                        prepend-icon="mdi-calendar"
-                        readonly
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                    <v-date-picker
-                      v-model="date"
-                      @input="menu1 = false"
-                    ></v-date-picker>
-                  </v-menu>
+                <v-col cols="8">
+                  <VueDatePicker
+                    v-model="date"
+                    :min-date="new Date()"
+                    label="預約日期"
+                    required
+                    class="v-text-field"
+                    style="width: 100%"
+                  />
                 </v-col>
-                <v-col cols="4">
-                  <v-menu
-                    v-model="menu2"
-                    :close-on-content-click="false"
-                    transition="scale-transition"
-                    offset-y
-                    min-width="auto"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="time"
-                        label="預約時間"
-                        prepend-icon="mdi-clock"
-                        readonly
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                    <v-time-picker
-                      v-model="time"
-                      format="24hr"
-                      @input="menu2 = false"
-                    ></v-time-picker>
-                  </v-menu>
-                </v-col>
+
                 <v-col cols="4">
                   <v-select
                     :items="peopleOptions"
@@ -110,16 +73,14 @@
 import { ref } from "vue";
 import { definePage } from "vue-router/auto";
 import Footer from "@/layouts/footer.vue";
+import VueDatePicker from "@vuepic/vue-datepicker"; // 引入 Vue Datepicker
+import "@vuepic/vue-datepicker/dist/main.css"; // 引入 Vue Datepicker 的樣式
 
-const date = ref("");
-const time = ref("");
-const menu1 = ref(false);
-const menu2 = ref(false);
+const date = ref(new Date()); // 預設日期為當前日期
 const peopleOptions = ["1", "2", "3", "4", "5", "6", "7"];
 const loading = ref(false);
 const userName = ref("");
 const timeout = ref(null);
-
 const rules = [(value) => checkApi(value)];
 
 const submit = async (event) => {
@@ -143,7 +104,7 @@ const checkApi = async (userName) => {
     clearTimeout(timeout.value);
 
     timeout.value = setTimeout(() => {
-      if (!userName) return resolve("Please enter a user name.");
+      if (!userName) return resolve("請填姓名");
       if (userName === "johnleider")
         return resolve("User name already taken. Please try another one.");
 
@@ -177,5 +138,17 @@ p {
   width: 1280px;
   margin: auto;
   border-radius: 15px;
+}
+
+.v-text-field {
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.vue-datepicker {
+  width: 100%;
+  border: 1px solid #d3d3d3;
+  border-radius: 4px;
+  padding: 10px;
 }
 </style>

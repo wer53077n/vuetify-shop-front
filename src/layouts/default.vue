@@ -71,13 +71,23 @@
                 </router-link>
               </v-list-item>
               <v-btn
-                prepend-icon="mdi-account-arrow-right"
-                v-if="user.isLogin"
-                @click="logout"
-                class="nav-link ml-4"
+                prepend-icon="mdi-account-cog"
+                v-if="user.isAdmin"
+                to="/admin"
+                class="nav-link mx-4"
               >
-                登出
+                管理者系統
               </v-btn>
+              <v-list>
+                <v-btn
+                  prepend-icon="mdi-account-arrow-right"
+                  v-if="user.isLogin"
+                  @click="logout"
+                  class="nav-link mx-4"
+                >
+                  登出
+                </v-btn>
+              </v-list>
             </v-list>
           </v-menu>
           <v-btn
@@ -184,15 +194,15 @@ const navItems = computed(() => {
 const navItemMeun = computed(() => {
   return [
     {
-      to: "/admin",
-      title: "管理者系統",
-      icon: "mdi-account-cog",
-      show: user.isAdmin,
-    },
-    {
       to: "/orders",
       title: "訂單查詢",
       icon: "mdi-list-box",
+      show: user.isLogin,
+    },
+    {
+      to: "/reserveinfo",
+      title: "預約查詢",
+      icon: "mdi-bookmark-check",
       show: user.isLogin,
     },
   ];

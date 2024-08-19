@@ -10,9 +10,13 @@
 	"dependencies": {
 		"@boindil/vue-file-agent-next": "^1.0.5",
 		"@mdi/font": "7.0.96",
+		"@vuepic/vue-datepicker": "^9.0.2",
 		"aos": "^2.3.4",
 		"axios": "^1.7.2",
 		"core-js": "^3.34.0",
+		"gsap": "^3.12.5",
+		"install": "^0.13.0",
+		"npm": "^10.8.2",
 		"pinia-plugin-persistedstate": "^3.2.1",
 		"roboto-fontface": "*",
 		"swiper": "^11.1.8",

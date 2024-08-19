@@ -1,12 +1,13 @@
 <template>
-  <div class="background">
+  <div id="background">
     <v-container>
       <v-row>
         <v-col cols="12">
           <v-img class="foodBN" src="../assets/嚴選食材BN.jpg"></v-img>
         </v-col>
       </v-row>
-      <v-row data-aos="fade-up">
+
+      <v-row class="R1">
         <v-col cols="6">
           <v-img src="../assets/嚴選食材區塊_生菜.png"></v-img>
         </v-col>
@@ -17,8 +18,9 @@
           </p>
         </v-col>
       </v-row>
-      <v-row data-aos="fade-up">
-        <v-col class="text" clos="6">
+
+      <v-row class="R2">
+        <v-col class="text" cols="6">
           <h1>臺灣究好豬</h1>
           <p>
             產銷履歷牧場，可追溯來源，全程冷鏈，維持肉品的鮮度與品質
@@ -30,11 +32,11 @@
         </v-col>
       </v-row>
 
-      <v-row>
+      <v-row class="R3">
         <v-col cols="6">
           <v-img src="../assets/嚴選食材區塊_蛋.png"></v-img>
         </v-col>
-        <v-col class="text" clos="6">
+        <v-col class="text" cols="6">
           <h1>育承養生雞蛋</h1>
           <p>
             天然養生蛋，無藥物殘留，無抗生素<br />
@@ -42,8 +44,9 @@
           </p>
         </v-col>
       </v-row>
-      <v-row data-aos="fade-up">
-        <v-col class="text" clos="6">
+
+      <v-row class="R4">
+        <v-col class="text" cols="6">
           <h1>光泉鮮乳</h1>
           <p>
             有CAS、TQF、鮮乳標章，三大重要的品質驗證標章，嚴選國內最專業的酪農戶合作，來源安心有保障
@@ -54,11 +57,12 @@
           <v-img src="../assets/嚴選食材區塊_牛奶.png"></v-img>
         </v-col>
       </v-row>
-      <v-row data-aos="fade-up">
+
+      <!-- <v-row>
         <v-col cols="6">
           <v-img src="../assets/嚴選食材區塊_白飯.png"></v-img>
         </v-col>
-        <v-col class="text" clos="6">
+        <v-col class="text" cols="6">
           <h1>台灣花蓮契作壽司米</h1>
           <p>
             堅持友善農耕，導入產銷履歷契作 詳實記錄栽種生產過程，保護環境
@@ -66,8 +70,9 @@
           </p>
         </v-col>
       </v-row>
-      <v-row data-aos="fade-up">
-        <v-col class="text" clos="6">
+
+      <v-row>
+        <v-col class="text" cols="6">
           <h1>豆漿農</h1>
           <p>
             只用基本的天然食材，不需要化學添加物也可以煮出好味道。不含防腐劑、增稠劑、消泡劑等化學添加劑
@@ -77,19 +82,21 @@
           <v-img src="../assets/嚴選食材區塊_豆漿.png"></v-img>
         </v-col>
       </v-row>
-      <v-row data-aos="fade-up">
+
+      <v-row>
         <v-col cols="6">
           <v-img src="../assets/嚴選食材區塊_橄欖油.png"></v-img>
         </v-col>
-        <v-col class="text" clos="6">
+        <v-col class="text" cols="6">
           <h1>義大利橄欖油</h1>
           <p>
             天然果實以冷壓方式榨取100%天然純淨的橄欖油，保存完整的天然營養素，不含添加物、鹽份，零膽固醇
           </p>
         </v-col>
       </v-row>
-      <v-row data-aos="fade-up">
-        <v-col class="text" clos="6">
+
+      <v-row>
+        <v-col class="text" cols="6">
           <h1>自製優格</h1>
           <p>
             活菌數多，成分單純，無添加物，熱量低，可加強蛋白質的吸收，提高鈣的吸收率，含大量益生菌，能促進腸胃蠕動，幫助消化，順暢排便
@@ -98,44 +105,99 @@
         <v-col cols="6">
           <v-img src="../assets/嚴選食材區塊_優格.png"></v-img>
         </v-col>
-      </v-row>
+      </v-row> -->
     </v-container>
   </div>
   <Footer></Footer>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-import AOS from "aos";
-import "aos/dist/aos.css"; // 引入 AOS 的樣式
+// ------------------GSAP-----------------------
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger); // 註冊GSAP套件
 
 import Footer from "@/layouts/footer.vue";
-
-onMounted(() => {
-  AOS.init({
-    // 偵測滾動位置的設置
-    offset: 120, // 動畫觸發的滾動位置偏移
-    delay: 800, // 動畫開始前的延遲時間
-    duration: 400, // 動畫持續時間
-    once: false, // 是否只在首次滾動時觸發動畫（false 則每次滾動到可見區域都會觸發）
-  });
-});
 
 definePage({
   meta: {
     title: "梅室 | 嚴選食材",
     login: true,
-    admin: false,
+    admin: true,
   },
+});
+
+onMounted(() => {
+  // 為每個 <v-row> 單獨設定動畫和 ScrollTrigger
+  const rowR1 = document.querySelector(".R1");
+  gsap.fromTo(
+    rowR1,
+    { y: 100, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      scrollTrigger: {
+        trigger: rowR1,
+        start: "top center",
+        end: "bottom center",
+        toggleActions: "play none none reverse",
+      },
+    }
+  );
+
+  const rowR2 = document.querySelector(".R2");
+  gsap.fromTo(
+    rowR2,
+    { y: 100, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      scrollTrigger: {
+        trigger: rowR2,
+        start: "bottom top",
+        end: "bottom center",
+        toggleActions: "play none none reverse",
+        // markers: true,
+      },
+    }
+  );
+  onMounted(() => {
+    const rowR3 = document.querySelector(".R3");
+    if (rowR3) {
+      // 確保元素存在
+      gsap.fromTo(
+        rowR3,
+        { y: 100, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: rowR3,
+            start: "top center",
+            end: "bottom center",
+            toggleActions: "play none none reverse",
+            markers: true,
+          },
+        }
+      );
+    }
+  });
 });
 </script>
 
 <style scoped lang="scss">
-.background {
+template {
+  height: 100%;
+}
+#background {
   height: 100%;
   background-image: url("@/assets/umemuro-background.jpg");
   background-size: cover;
   background-position: center;
+  z-index: 0;
 }
 .v-container {
   width: 1280px;
