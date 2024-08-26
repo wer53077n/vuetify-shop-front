@@ -28,11 +28,13 @@
 
     <v-container>
       <!--------------------------- Title的大LOGO --------------------------->
-      <v-row justify="center" align="center">
-        <v-col cols="12" class="d-flex justify-center py-10">
-          <v-img src="../assets/umeguro_logo.png" height="500"></v-img>
-        </v-col>
-      </v-row>
+      <div data-aos="fade-up" data-aos-duration="2000">
+        <v-row justify="center" align="center">
+          <v-col cols="12" class="d-flex justify-center py-16 my-10">
+            <v-img src="../assets/umeguro_logo.png" height="500"></v-img>
+          </v-col>
+        </v-row>
+      </div>
     </v-container>
 
     <!--------------------------- 輪播圖 --------------------------->
@@ -51,7 +53,7 @@
         }"
         :navigation="true"
         :modules="modules"
-        class="mySwiper py-15"
+        class="mySwiper py-16 my-5"
       >
         <swiper-slide v-for="(images, index) in images" :key="index" cover>
           <v-img :src="images" height="600" cover></v-img>
@@ -172,45 +174,43 @@
     <!--------------------------- 地圖 --------------------------->
     <v-container class="mapContainer">
       <!-- AOS 動畫包裹 -->
-      <div data-aos="fade-up">
-        <v-row class="pt-16">
+      <div id="map">
+        <v-row class="pt-16 mt-5">
           <v-col cols="5" class="map">
-            <div id="map">
-              <h1>梅室在哪</h1>
-              <br />
-              <p>新北市新莊區中華路二段284號</p>
-              <p>02 2994 0557</p>
-              <br />
-              <v-btn
-                rounded="xl"
-                size="x-large"
-                color="#971a07"
-                variant="outlined"
+            <h1>梅室在哪</h1>
+            <br />
+            <p>新北市新莊區中華路二段284號</p>
+            <p>02 2994 0557</p>
+            <br />
+            <v-btn
+              rounded="xl"
+              size="x-large"
+              color="#971a07"
+              variant="outlined"
+            >
+              <a
+                href="https://maps.app.goo.gl/bct2W2qBXNPTyTRW7"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="text-decoration: none; color: inherit"
               >
-                <a
-                  href="https://maps.app.goo.gl/bct2W2qBXNPTyTRW7"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style="text-decoration: none; color: inherit"
-                >
-                  GOOGLE MAP 》</a
-                ></v-btn
-              >
-              <br />
-              <v-btn
-                to="/reserve"
-                rounded="xl"
-                size="x-large"
-                color="#971a07"
-                variant="flat"
-                class="ma-5"
-                :loading="loading"
-              >
-                前往預約
-              </v-btn>
-            </div>
+                GOOGLE MAP 》</a
+              ></v-btn
+            >
+            <!-- <br />
+            <v-btn
+              to="/reserve"
+              rounded="xl"
+              size="x-large"
+              color="#971a07"
+              variant="flat"
+              class="ma-5"
+              :loading="loading"
+            >
+              前往預約
+            </v-btn> -->
           </v-col>
-          <v-col cols="7">
+          <v-col cols="7" data-aos="fade-up" data-aos-duration="3000">
             <v-img class="mapImg" src="../assets/map.png"></v-img>
           </v-col>
         </v-row>
@@ -224,7 +224,9 @@
 <script setup>
 import { ref } from "vue";
 import { definePage } from "vue-router/auto";
+import { useRouter } from "vue-router";
 import Footer from "@/layouts/footer.vue";
+
 // swiper套件，最新消息、菜單 輪播圖 ---------------------------------------------
 import { Swiper, SwiperSlide } from "swiper/vue";
 import {
@@ -272,21 +274,11 @@ const goToFood = () => {
 
 onMounted(() => {
   AOS.init({
-    // 全局設置動畫的持續時間
     duration: 1500, // 動畫持續時間，單位為毫秒
-
-    // 動畫的延遲時間
     delay: 100, // 延遲時間，單位為毫秒
-
-    // 動畫的觸發點，基於元素在 viewport 中的位置
     offset: 200, // 觸發動畫的偏移量，單位為像素
-
-    // 控制動畫重複觸發
     once: false, // 是否只觸發一次動畫（false 為重複觸發）
-
-    // 動畫的起始點（0-1），表示動畫在滾動到視口的何處開始
     anchorPlacement: "top-bottom", // 例如 'top-center', 'bottom-bottom', 'top-bottom' 等
-
     // 當滾動到某個位置後是否啟用動畫
     disable: function () {
       // 比如在某個 breakpoint 之後禁用動畫
@@ -309,7 +301,7 @@ onMounted(() => {
   width: 250px;
   padding: 10px;
   position: fixed;
-  top: 20%;
+  top: 30%;
   left: 0;
   transform: translate(-5%);
   z-index: 2;

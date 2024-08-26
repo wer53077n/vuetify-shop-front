@@ -6,6 +6,7 @@ import Layouts from 'vite-plugin-vue-layouts'
 import Vue from '@vitejs/plugin-vue'
 import VueRouter from 'unplugin-vue-router/vite'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import { VitePWA } from 'vite-plugin-pwa'
 
 // Utilities
 import { defineConfig } from 'vite'
@@ -44,6 +45,22 @@ export default defineConfig({
 				enabled: true
 			},
 			vueTemplate: true
+		}),
+		VitePWA({
+			manifest: {
+				icons: [
+					{
+						src: '/android-chrome-192x192.png',
+						sizes: '192x192',
+						type: 'image/png'
+					},
+					{
+						src: '/android-chrome-384x384.png',
+						sizes: '384x384',
+						type: 'image/png'
+					}
+				]
+			}
 		})
 	],
 	define: { 'process.env': {} },

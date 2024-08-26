@@ -40,7 +40,7 @@ const navItems = [
     icon: "mdi-shopping",
   },
   { to: "/admin/orders", text: "訂單管理", icon: "mdi-list-box" },
-  { to: "/admin/reserve", text: "預約管理", icon: "mdi-bookmark-multiple" },
+  // { to: "/admin/reserve", text: "預約管理", icon: "mdi-bookmark-multiple" },
   { to: "/", text: "回首頁", icon: "mdi-home" },
 ];
 

@@ -43,7 +43,7 @@
               <!-- 註冊按鈕 -->
               <v-btn
                 type="button"
-                class="novip ml-5"
+                class="novip"
                 @click="openDialog('register')"
                 elevation="0"
               >

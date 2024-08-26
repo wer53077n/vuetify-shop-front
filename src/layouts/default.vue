@@ -171,12 +171,12 @@ const navItems = computed(() => {
       icon: null,
       show: true,
     },
-    {
-      to: "/reserve",
-      title: "預約服務",
-      icon: null,
-      show: true,
-    },
+    // {
+    //   to: "/reserve",
+    //   title: "預約服務",
+    //   icon: null,
+    //   show: true,
+    // },
     {
       to: "/shop",
       title: "梅室週邊",
@@ -186,7 +186,7 @@ const navItems = computed(() => {
     {
       to: "/cart",
       icon: "mdi-cart",
-      show: true,
+      show: user.isLogin,
     },
   ];
 });
@@ -199,12 +199,12 @@ const navItemMeun = computed(() => {
       icon: "mdi-list-box",
       show: user.isLogin,
     },
-    {
-      to: "/reserveinfo",
-      title: "預約查詢",
-      icon: "mdi-bookmark-check",
-      show: user.isLogin,
-    },
+    // {
+    //   to: "/reserveinfo",
+    //   title: "預約查詢",
+    //   icon: "mdi-bookmark-check",
+    //   show: user.isLogin,
+    // },
   ];
 });
 
@@ -232,7 +232,7 @@ const openDialog = (type) => {
 
 .nav-link {
   color: #971a07; /* 修改這裡的顏色 */
-  font-weight: bold;
+  font-weight: bolder;
   background-color: none;
   box-shadow: none;
 }

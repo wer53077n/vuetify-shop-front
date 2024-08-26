@@ -1,7 +1,20 @@
 <template>
   <v-container>
     <v-card class="pa-3">
-      <v-img :src="image" center width="350"></v-img>
+      <v-img
+        :src="image"
+        center
+        width="350"
+        @mouseenter="isHovering = true"
+        @mouseleave="isHovering = false"
+      >
+        <v-expand-transition>
+          <div
+            v-if="isHovering"
+            class="d-flex transition-fast-in-fast-out v-card--reveal"
+            style="height: 100%; background-color: #971a07"
+          ></div> </v-expand-transition
+      ></v-img>
       <v-row>
         <v-col>
           <v-card-title>
@@ -26,14 +39,43 @@
         >
       </v-card-actions>
     </v-card>
+    <!-- 登入對話框 -->
+    <v-dialog v-model="dialog" max-width="400px">
+      <v-card v-if="dialogType === 'register'">
+        <v-card-title class="headline"></v-card-title>
+        <v-btn
+          class="text-right ml-3"
+          icon="mdi-close"
+          variant="text"
+          @click="dialog = false"
+        ></v-btn>
+        <v-card-text>
+          <Register @close-dialog="dialog = false" />
+        </v-card-text>
+      </v-card>
+      <v-card v-if="dialogType === 'login'">
+        <v-card-title class="headline"></v-card-title>
+        <v-btn
+          class="text-right ml-3"
+          icon="mdi-close"
+          variant="text"
+          @click="dialog = false"
+        ></v-btn>
+        <v-card-text>
+          <Login @close-dialog="dialog = false" />
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
 <script setup>
-import { useUserStore } from "@/stores/user";
-import { useRouter } from "vue-router";
-import { useSnackbar } from "vuetify-use-dialog";
 import { ref } from "vue";
+import { useUserStore } from "@/stores/user";
+import { useSnackbar } from "vuetify-use-dialog";
+import { useRouter } from "vue-router";
+import Login from "@/pages/login.vue"; // 引入Login.vue
+import Register from "@/pages/register.vue"; // 引入Register.vue
 
 const user = useUserStore();
 const router = useRouter();
@@ -50,10 +92,14 @@ const props = defineProps([
 ]);
 
 const loading = ref(false);
+const isHovering = ref(false);
+const dialog = ref(false);
+const dialogType = ref("login"); // 用於跟踪打開的對話框類型
 
 const addCart = async () => {
   if (!user.isLogin) {
-    router.push("/login");
+    dialogType.value = "login";
+    dialog.value = true;
     return;
   }
   loading.value = true;
@@ -72,8 +118,15 @@ const addCart = async () => {
 .v-card-title {
   text-align: left;
   margin: auto;
-  padding: 16px;
+  padding: 13px;
+  text-decoration: none;
+  router-link {
+    text-decoration: none;
+    color: #971a07;
+    font-size: 20px;
+  }
 }
+
 .v-card-subtitle {
   text-align: right;
   margin: 1rem auto;
@@ -84,5 +137,13 @@ const addCart = async () => {
   font-size: 1rem;
   padding: 0;
   margin: 1rem;
+}
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 0.4;
+  position: absolute;
+  width: 100%;
 }
 </style>

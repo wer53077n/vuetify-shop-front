@@ -3,7 +3,9 @@
     <v-divider class="my-4"></v-divider>
     <v-row class="d-flex align-content-between">
       <v-col cols="7">
-        <v-img src="../assets/梅室umeguro_logo guide-18.png"></v-img>
+        <a href="../pages/index.vue">
+          <v-img src="../assets/梅室umeguro_logo guide-18.png"></v-img
+        ></a>
         <h2>早午餐、咖啡、點心</h2>
       </v-col>
       <v-col cols="5" class="pt-0 px-4">
